@@ -5,7 +5,9 @@ import itertools
 import math
 
 app = FastAPI()
-
+@app.get("/")
+def read_root():
+    return {"message": "API is live!"}
 warehouse_stock_weights = {
     "C1": {"A": 3, "B": 2, "C": 8},
     "C2": {"D": 12, "E": 25, "F": 15},
@@ -79,7 +81,6 @@ def calculate(order: Order):
                 next_center = perm[i + 1]
                 cost += distances[("L1", next_center)] * 10
 
-        if cost < min_cost:
-            min_cost = cost
-
+    if cost < min_cost:
+      min_cost = cost
     return {"minimum_cost": round(min_cost)}
